@@ -16,6 +16,10 @@ upload_router = APIRouter(
     tags=['upload'],
 )
 
+
+# 
+# get /v1/u/ returns the list of all uploaded files.
+# 
 @upload_router.get(
     "/u/",
     response_model=schema.ResponseListUploadModel
@@ -30,6 +34,9 @@ async def upload_message(
     }
 
 
+# 
+# post /v1/u/ -> upload a file.
+# 
 @upload_router.post(
     "/u/", 
     response_model=schema.ResponseUploadModel,
@@ -80,6 +87,9 @@ async def upload_file(
 
 
 
+# 
+# POST /v1/u/m/ -> Upload multiple files.
+# 
 @upload_router.post(
     "/u/m/", 
     response_model=schema.ResponseListUploadModel,
@@ -96,8 +106,6 @@ async def upload_multiple_file(
             "message": "No file uploaded"
         }, status_code=status.HTTP_400_BAD_REQUEST)
 
-    # filename = helpers.generate_filename(files)
-    
     
     uploadsize = 64 * 1024
     # filesize = file.size

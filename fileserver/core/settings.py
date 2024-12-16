@@ -1,21 +1,12 @@
 import os
 from pathlib import Path
-from rich import print
+from . import helpers
 
 BASE_DIR = Path("__file__").resolve().parent
 
 
-UPLOAD_DIR = BASE_DIR / "uploads"
+UPLOAD_DIR = helpers.create_folder(BASE_DIR, "uploads")
 
-
-# Create upload path is not exist.
-if not os.path.exists(UPLOAD_DIR):
-    print("\n\t[italic red]Upload didn't exists :([/italic red]")
-    print("\t[italic yellow]Creating the Upload[/italic yellow]")
-    os.mkdir(UPLOAD_DIR)
-    print("\t[bold green]Upload Created  :)[/bold green]\n")
-else:
-    print("\n\t[bold green]Upload found :)[/bold green]\n")
 
 ALLOWED_ORIGINS = [
     "http://localhost:8000",
@@ -29,7 +20,7 @@ ALLOWED_ORIGINS = [
 
 ALLOWED_METHODS = [
     "GET",
-    # "POST",
+    "POST",
     "OPTIONS"
 ]
 

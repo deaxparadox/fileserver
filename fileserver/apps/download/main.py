@@ -22,7 +22,6 @@ async def main(fid: str | None = None, db: Session = Depends(get_db)):
     
     filepath, filename = await crud.search_file(fid, db)
     
-    
     print(filename)
     print(filepath)
     
@@ -33,4 +32,3 @@ async def main(fid: str | None = None, db: Session = Depends(get_db)):
                 
     headers = {'Content-Disposition': f'attachment; filename="{filename}"'}
     return StreamingResponse(iterfile(), headers=headers, media_type='application/x-tar')
-    

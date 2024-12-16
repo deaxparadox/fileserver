@@ -34,7 +34,7 @@ class GETENV:
         env = self._getenv()
         return env
 
-    def __gt__(self, )
+    # def __gt__(self, )
 
 # # configuration env
 # WORKERS = GETENV('WORKERS', type=int)

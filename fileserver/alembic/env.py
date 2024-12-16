@@ -5,6 +5,10 @@ from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 from alembic import context
 
+
+# 
+# import all the model
+# 
 from apps.upload import models as upload_model
 from apps.authentication import models as user_model
 

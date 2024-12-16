@@ -39,5 +39,3 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message": "Welcome to download file server."}
-
-    

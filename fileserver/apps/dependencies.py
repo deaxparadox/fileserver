@@ -14,8 +14,8 @@ def content_type_multipart_form_data(content_type: Annotated[str, Header()]):
     """
     Upload post request must be of type `multi-part/form-data`
     """
-    print(content_type)
-    if content_type != "multipart/form-data":
+    # print(content_type, "multipart/form-data" in content_type)
+    if "multipart/form-data" not in content_type:
         raise HTTPException(
             status.HTTP_400_BAD_REQUEST, 
             detail="Only accept multipart/form-data"
