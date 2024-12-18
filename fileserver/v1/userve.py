@@ -8,6 +8,11 @@ from main import app
 
 # SERVER CONFIGURATIONS
 
+# Reload and worker configurations.
+# 
+# Rreload will not work with multiple workers, so
+# set enable --reload=true with --workers=1 only.
+# 
 RELOAD = False
 WORKERS = os.getenv("WORKERS")
 if not WORKERS:
@@ -17,14 +22,17 @@ else:
     WORKERS = int(WORKERS)
 
 
+# PORT configuration
+# 
 PORT = os.getenv("PORT")
 if not PORT:
-    PORT = 8000
+    PORT = 9000
 else:
     PORT = int(PORT)
 
 
 # DOCKER CONFIGURATION
+# 
 DOCKER = os.getenv("DOCKER")
 if DOCKER:
     HOST = os.getenv("HOST")

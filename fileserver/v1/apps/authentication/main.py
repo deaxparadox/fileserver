@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Response, status, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
+from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 from typing import Annotated
-from fastapi.security import OAuth2PasswordBearer
 
 from apps.upload.helpers import generate_id
 from apps.authentication import cruds, schema
@@ -15,7 +16,28 @@ auth_router = APIRouter(
 )
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+
+@auth_router.post("/token")
+async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
+    user_dict = cruds.fake_users_db.get(form_data.username)
+    if not user_dict:
+        raise HTTPException(
+            status_code=400,
+            detail="Incorrect username and password."
+        )
+    user = cruds.UserInDBSchema(**user_dict)
+    hashed_passwrod = cruds.fake_hash_password(form_data.password)
+    if not hashed_passwrod == user.hashed_password:
+        raise HTTPException(status_code=400, detail="Incorrect username and password")
+    return {"access_token": user.username, "token_type": "bearer"}
+
+
+@auth_router.get("/auth/users/me")
+async def read_users_me(
+    current_user: Annotated[schema.UserSchema, Depends(cruds.get_current_user)]
+):
+    return current_user
+
 
 @auth_router.get("/auth")
 async def authentication_root(db: Session =  Depends(get_db)):
@@ -40,7 +62,3 @@ async def create_user(user_schema: schema.UserRequestSchema):
     # return Response({"user": new_user}, status_code=status.HTTP_201_CREATED)
     return {}
 
-
-@auth_router.get("/users/me")
-async def read_users_me(current_user: Annotated[schema.UserSchema, Depends(cruds.get_current_user)]):
-    return current_user
