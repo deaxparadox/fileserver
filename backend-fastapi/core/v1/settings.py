@@ -2,10 +2,14 @@ import os
 from pathlib import Path
 from . import helpers
 
-BASE_DIR = Path("__file__").resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+PROJECT_DIR = BASE_DIR.parent
+print("#############################", BASE_DIR)
+print("#############################", PROJECT_DIR)
 
-
-UPLOAD_DIR = await helpers.create_folder(BASE_DIR, "uploads")
+async def check_upload():
+    global UPLOAD_DIR
+    UPLOAD_DIR = await helpers.create_folder(BASE_DIR, "uploads")
 
 
 ALLOWED_ORIGINS = [

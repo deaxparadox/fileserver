@@ -6,7 +6,7 @@ from fastapi import status
 from sqlalchemy.orm import Session
 import aiofiles
 
-from core.database import get_db
+from ....core.v1.database import get_db
 from core import settings
 from apps.upload import crud, schema, helpers
 from apps.dependencies import UploadDependency, content_type_multipart_form_data

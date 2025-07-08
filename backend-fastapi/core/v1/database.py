@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-from core.settings import UPLOAD_DIR
+from .settings import UPLOAD_DIR
 
 SQLALCHEMY_DATABASE_URL = f"sqlite:///./sql_app.db"
 

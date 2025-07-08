@@ -5,16 +5,15 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 from typing import Annotated
 
-from apps.upload.helpers import generate_id
-from apps.authentication import cruds, schema
-from core.database import get_db
+from ..upload.helpers import generate_id
+from ..authentication import cruds, schema
+from ...core.database import get_db
 
 
 auth_router = APIRouter(
     prefix="/v1",
     tags=["auth", "authentication"],
 )
-
 
 
 @auth_router.post("/token")
