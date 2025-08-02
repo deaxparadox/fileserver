@@ -6,10 +6,10 @@ from fastapi import status
 from sqlalchemy.orm import Session
 import aiofiles
 
-from ....core.v1.database import get_db
-from core import settings
-from apps.upload import crud, schema, helpers
-from apps.dependencies import UploadDependency, content_type_multipart_form_data
+from backend.core.v1.database import get_db
+from backend.core import settings
+from backend.apis.v1.upload import crud, schema, helpers
+from backend.apis.v1.dependencies import UploadDependency, content_type_multipart_form_data
 
 upload_router = APIRouter(
     prefix="/v1",

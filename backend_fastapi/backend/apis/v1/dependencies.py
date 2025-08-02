@@ -2,7 +2,7 @@ from fastapi import Depends, File, UploadFile, Header, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import Annotated
 
-from core.database import get_db
+from core.v1.database import get_db
 
 class UploadDependency:
     def __init__(self,  db: Annotated[Session, Depends(get_db)], file: Annotated[UploadFile, File(description="Upload a file.")] = None):
