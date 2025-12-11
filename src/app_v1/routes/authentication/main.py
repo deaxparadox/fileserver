@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
-from ..v1 import router_auth_v1
+from .. import router_auth_v1
 from backend.apis.v1.upload.helpers import generate_id
 from backend.apis.v1.authentication import cruds, schema
 from backend.core.v1.database import get_db

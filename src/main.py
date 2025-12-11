@@ -2,20 +2,16 @@ import os
 from pathlib import Path
 import sys
 
-BASE_DIR = Path(__file__).resolve().parent
-sys.path.append(str(BASE_DIR))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.apis.v1.upload.main import upload_router
-from backend.apis.v1.download.main import download_router
-from backend.apis.v1.authentication.main import auth_router
+from app_v1.routes import router_v1
 
 # setting
-from backend.core.v1.database import SessionLocal, engine
+from app_v1.database import SessionLocal, engine
 
-from backend.common import (
+from common import (
     config,
     logging
 )
@@ -23,9 +19,7 @@ from backend.common import (
 
 app = FastAPI()
 
-app.include_router(upload_router)
-app.include_router(download_router)
-app.include_router(auth_router)
+app.include_router(router_v1, prefix="/api")
 
 
 app.add_middleware(

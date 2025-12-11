@@ -1,12 +1,12 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import JSONResponse, StreamingResponse
 from sqlalchemy.orm import Session
-from core.database import get_db
+from app_v1.database import get_db
 import aiofiles
 
 
-from apps.download import crud
-from apps.upload import helpers
+from . import crud
+from app_v1.routes.upload import helpers
 
 download_router = APIRouter(
     prefix="/d",
